@@ -1,0 +1,8 @@
+{
+  "name": "salt-coding-challenge",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "https://github.com/k1bs/salt-coding-challenge.git",
+  "author": "Alex Kibler <alexkibler@me.com>",
+  "license": "MIT"
+}
