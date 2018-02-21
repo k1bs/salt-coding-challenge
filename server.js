@@ -33,3 +33,17 @@ app.listen(PORT, () => {
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
+
+app.use('*', (req, res) => {
+  res.status(400).json({
+    message: 'Not Found!'
+  })
+})
+
+app.use((err, req, res, next) => {
+  console.log(err)
+  res.status(500).json({
+    error: err,
+    message: err.message
+  })
+})
