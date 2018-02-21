@@ -5,6 +5,11 @@
   "repository": "https://github.com/k1bs/salt-coding-challenge.git",
   "author": "Alex Kibler <alexkibler@me.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "debugger": "DEBUG=*:* nodemon server.js"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
