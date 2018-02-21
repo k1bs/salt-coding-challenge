@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import Footer from './components/Footer'
+import Home from './components/Home'
+import Header from './components/Header'
 import './App.css'
 
 class App extends Component {
