@@ -3,10 +3,10 @@ import React, { Component } from 'react'
 class Login extends Component {
   constructor () {
     super()
-    this.state({
+    this.state = {
       username: '',
       password: ''
-    })
+    }
     this.handleInputChange = this.handleInputChange.bind(this)
   }
 
