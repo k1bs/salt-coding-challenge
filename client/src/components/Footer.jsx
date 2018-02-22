@@ -2,7 +2,9 @@ import React from 'react'
 
 const Footer = () => (
   <footer className='footer'>
-    <h6>Alex Kibler for SALT Lending</h6>
+    <div className='container'>
+      <h6>Alex Kibler for SALT Lending</h6>
+    </div>
   </footer>
 )
 
