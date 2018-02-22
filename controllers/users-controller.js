@@ -23,3 +23,5 @@ usersController.create = (req, res, next) => {
     })
   }).catch(next)
 }
+
+module.exports = usersController
