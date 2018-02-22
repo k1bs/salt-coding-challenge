@@ -12,5 +12,5 @@ CREATE TABLE IF NOT EXISTS orders (
   from_amt DECIMAL(19, 8),
   to_curr VARCHAR(255),
   to_amt DECIMAL(19, 4),
-  user_id INT REFERENCES user(id)
+  user_id INT REFERENCES users(id)
 );
