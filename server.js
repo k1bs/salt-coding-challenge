@@ -37,6 +37,9 @@ app.get('/', (req, res) => {
 const authRoutes = require('./routes/auth-routes')
 app.use('/api/auth', authRoutes)
 
+const orderRoutes = require('./routes/order-routes')
+app.use('/api/orders', orderRoutes)
+
 app.use('*', (req, res) => {
   res.status(400).json({
     message: 'Not Found!'
