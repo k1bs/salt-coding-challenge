@@ -3,13 +3,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Header = () => (
-  <header>
-    <nav>
-      <ul>
-        <li><Link to='/'>Home</Link></li>
-      </ul>
-    </nav>
-  </header>
+  <nav className='navbar'>
+    <h1 className='navbar-brand'>App Title</h1>
+    <ul className='navbar-nav'>
+      <li classname='nav-item'><Link className='nav-link' to='/'>Home</Link></li>
+    </ul>
+  </nav>
 )
 
 export default Header
