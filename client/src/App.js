@@ -7,6 +7,7 @@ import Home from './components/Home'
 import Header from './components/Header'
 import Login from './components/Login'
 import Register from './components/Register'
+import Dashboard from './components/Dashboard'
 import './App.css'
 
 class App extends Component {
@@ -14,11 +15,21 @@ class App extends Component {
     super()
     this.state = {
       auth: false,
-      user: null
+      user: null,
+      orders: [],
+      balances: {
+        USD: null,
+        BTC: null,
+        LTC: null,
+        DOGE: null,
+        XMR: null
+      },
+      orderDataLoaded: false
     }
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this)
     this.handleRegisterSubmit = this.handleLoginSubmit.bind(this)
     this.logout = this.logout.bind(this)
+    this.getOrders = this.getOrders.bind(this)
   }
 
   handleLoginSubmit (e, data) {
@@ -59,6 +70,20 @@ class App extends Component {
       }).catch((err) => console.log(err))
   }
 
+  getOrders () {
+    fetch('/api/orders', {
+      credentials: 'include'
+    }).then((res) => res.json())
+      .then((json) => {
+        console.log(json)
+        this.setState({
+          orderDataLoaded: true,
+          orders: json.data.orders,
+          balances: json.data.balances
+        })
+      }).catch((err) => console.log(err))
+  }
+
   logout () {
     fetch('/api/auth/logout', {
       credentials: 'include'
@@ -81,13 +106,18 @@ class App extends Component {
             <Route exact path='/' component={Home} />
             <Route exact path='/login' render={() => (
               this.state.auth
-                ? <Redirect to='/' />
+                ? <Redirect to='/dashboard' />
                 : <Login handleLoginSubmit={this.handleLoginSubmit} />
             )} />
             <Route exact path='/register' render={() => (
               this.state.auth
-                ? <Redirect to='/' />
+                ? <Redirect to='/dashboard' />
                 : <Register handleRegisterSubmit={this.handleRegisterSubmit} />
+            )} />
+            <Route exact path='/dashboard' render={() => (
+              !this.state.auth
+                ? <Redirect to='/login' />
+                : <Dashboard getOrders={this.getOrders} balances={this.state.balances} orderDataLoaded={this.state.orderDataLoaded} />
             )} />
           </div>
           <Footer />
