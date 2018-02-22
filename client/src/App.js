@@ -18,6 +18,7 @@ class App extends Component {
     }
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this)
     this.handleRegisterSubmit = this.handleLoginSubmit.bind(this)
+    this.logout = this.logout.bind(this)
   }
 
   handleLoginSubmit (e, data) {
@@ -58,11 +59,24 @@ class App extends Component {
       }).catch((err) => console.log(err))
   }
 
+  logout () {
+    fetch('/api/auth/logout', {
+      credentials: 'include'
+    }).then((res) => res.json())
+      .then((json) => {
+        console.log(json)
+        this.setState({
+          auth: json.auth,
+          user: json.data.user
+        })
+      }).catch((err) => console.log(err))
+  }
+
   render () {
     return (
       <Router>
         <div className='App'>
-          <Header />
+          <Header logout={this.logout} auth={this.state.auth} />
           <div className='container'>
             <Route exact path='/' component={Home} />
             <Route exact path='/login' render={() => (
