@@ -4,7 +4,7 @@ const Footer = () => (
   <footer className='footer'>
     <div className='container'>
       <span>Alex Kibler for SALT Lending</span><br />
-      <span>Crypto prices provided by <a href='https://www.cryptocompare.com/' target='_blank'>CryptoCompare</a></span>
+      <span>Crypto prices provided by <a href='https://www.cryptocompare.com/' target='_blank' rel='noopener noreferrer'>CryptoCompare</a></span>
     </div>
   </footer>
 )
