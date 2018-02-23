@@ -24,12 +24,20 @@ class App extends Component {
         DOGE: null,
         XMR: null
       },
-      orderDataLoaded: false
+      pricesInUSD: {
+        BTC: null,
+        LTC: null,
+        DOGE: null,
+        XMR: null
+      },
+      orderDataLoaded: false,
+      pricesDataLoaded: false
     }
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this)
     this.handleRegisterSubmit = this.handleLoginSubmit.bind(this)
     this.logout = this.logout.bind(this)
     this.getOrders = this.getOrders.bind(this)
+    this.getPrices = this.getPrices.bind(this)
   }
 
   handleLoginSubmit (e, data) {
@@ -84,6 +92,22 @@ class App extends Component {
       }).catch((err) => console.log(err))
   }
 
+  getPrices () {
+    fetch('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,LTC,DOGE,XMR&tsyms=USD')
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          pricesInUSD: {
+            BTC: json.BTC.USD,
+            LTC: json.LTC.USD,
+            DOGE: json.DOGE.USD,
+            XMR: json.XMR.USD
+          },
+          pricesDataLoaded: true
+        })
+      }).catch((err) => console.log(err))
+  }
+
   logout () {
     fetch('/api/auth/logout', {
       credentials: 'include'
@@ -117,7 +141,12 @@ class App extends Component {
             <Route exact path='/dashboard' render={() => (
               !this.state.auth
                 ? <Redirect to='/login' />
-                : <Dashboard getOrders={this.getOrders} balances={this.state.balances} orderDataLoaded={this.state.orderDataLoaded} />
+                : <Dashboard getOrders={this.getOrders}
+                  getPrices={this.getPrices}
+                  balances={this.state.balances}
+                  pricesInUSD={this.state.pricesInUSD}
+                  orderDataLoaded={this.state.orderDataLoaded}
+                  pricesDataLoaded={this.state.pricesDataLoaded} />
             )} />
           </div>
           <Footer />
