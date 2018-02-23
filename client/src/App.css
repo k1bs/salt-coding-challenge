@@ -1,7 +1,11 @@
-html, body, .App {
-  min-height: 100%;
+html, body, #root {
+  height: 100%;
   margin: 0 0;
   padding: 0 0;
+}
+
+.App {
+  height: 100%;
 }
 
 .footer {
@@ -14,6 +18,11 @@ html, body, .App {
   flex-direction: column;
   justify-content: center;
   align-content: center;
+}
+
+.chart-container {
+  height: 40vh;
+  max-height: 40vh;
 }
 
 .logout {
