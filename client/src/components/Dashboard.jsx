@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 class Dashboard extends Component {
   componentDidMount () {
@@ -55,6 +56,7 @@ class Dashboard extends Component {
     return (
       <div>
         <h5>Total in USD - ${total}</h5>
+        <Link className='btn btn-dark' to='/neworder'>Place New Order</Link>
       </div>
     )
   }
