@@ -8,6 +8,7 @@ import Header from './components/Header'
 import Login from './components/Login'
 import Register from './components/Register'
 import Dashboard from './components/Dashboard'
+import NewOrderForm from './components/NewOrderForm'
 import './App.css'
 
 class App extends Component {
@@ -137,6 +138,11 @@ class App extends Component {
               this.state.auth
                 ? <Redirect to='/dashboard' />
                 : <Register handleRegisterSubmit={this.handleRegisterSubmit} />
+            )} />
+            <Route exact path='/neworder' render={() => (
+              !this.state.auth
+                ? <Redirect to='/login' />
+                : <NewOrderForm />
             )} />
             <Route exact path='/dashboard' render={() => (
               !this.state.auth
