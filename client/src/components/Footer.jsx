@@ -3,7 +3,8 @@ import React from 'react'
 const Footer = () => (
   <footer className='footer'>
     <div className='container'>
-      <h6>Alex Kibler for SALT Lending</h6>
+      <span>Alex Kibler for SALT Lending</span><br />
+      <span>Crypto prices provided by <a href='https://www.cryptocompare.com/' target='_blank'>CryptoCompare</a></span>
     </div>
   </footer>
 )
