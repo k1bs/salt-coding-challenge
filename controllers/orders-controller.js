@@ -27,10 +27,11 @@ orderController.indexLedger = (req, res, next) => {
     }).catch(next)
 }
 
+// For create, the db first needs to validate the balance of that currency
 orderController.create = (req, res, next) => {
   Order.indexByUserId(req.user.id)
     .then((orders) => {
-      let balances = orders.reduce((balanceObj, order) => {
+      let balances = orders.reduce((balanceObj, order) => { // reduce balance
         balanceObj[order.from_curr] -= parseInt(order.from_amt)
         balanceObj[order.to_curr] += parseInt(order.to_amt)
         return balanceObj
@@ -41,7 +42,7 @@ orderController.create = (req, res, next) => {
         DOGE: 0,
         XMR: 0
       })
-      if (balances[req.body.from_curr] >= req.body.from_amt) {
+      if (balances[req.body.from_curr] >= req.body.from_amt) { // only proceed if balance allows
         Order.create({
           fromCurr: req.body.from_curr,
           fromAmt: req.body.from_amt,
@@ -56,7 +57,7 @@ orderController.create = (req, res, next) => {
               }
             })
           }).catch(next)
-      } else {
+      } else { // else send a HILARIOUS server status code.
         res.status(418).json({
           message: 'Insufficient balance to place order'
         })
