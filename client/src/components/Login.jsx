@@ -30,7 +30,7 @@ class Login extends Component {
             <label htmlFor='password'>Password</label>
             <input id='password' type='password' name='password' className='form-control' value={this.state.password} placeholder='Password' onChange={this.handleInputChange} />
           </div>
-          <input type='submit' className='btn btn-dark' value='Log In' />
+          <input type='submit' className='btn btn-primary' value='Log In' />
         </form>
       </div>
     )

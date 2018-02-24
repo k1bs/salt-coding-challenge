@@ -21,12 +21,21 @@ class Register extends Component {
 
   render () {
     return (
-      <div>
+      <div className='auth-form'>
         <form onSubmit={(e) => this.props.handleRegisterSubmit(e, this.state)}>
-          <input type='text' name='username' value={this.state.username} placeholder='Username' onChange={this.handleInputChange} />
-          <input type='password' name='password' value={this.state.password} placeholder='Password' onChange={this.handleInputChange} />
-          <input type='email' name='email' value={this.state.email} placeholder='Email' onChange={this.handleInputChange} />
-          <input type='submit' value='Register' />
+          <div className='form-group'>
+            <label htmlFor='username'>Username</label>
+            <input id='username' type='text' className='form-control' name='username' value={this.state.username} placeholder='Username' onChange={this.handleInputChange} />
+          </div>
+          <div className='form-group' >
+            <label htmlFor='password'>Password</label>
+            <input id='password' type='password' className='form-control' name='password' value={this.state.password} placeholder='Password' onChange={this.handleInputChange} />
+          </div>
+          <div className='form-group' >
+            <label htmlFor='email'>Email</label>
+            <input id='email' type='email' className='form-control' name='email' value={this.state.email} placeholder='Email' onChange={this.handleInputChange} />
+          </div>
+          <input type='submit' className='btn btn-primary' value='Register' />
         </form>
       </div>
     )
