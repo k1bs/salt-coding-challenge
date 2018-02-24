@@ -32,10 +32,12 @@ class App extends Component {
         XMR: null
       },
       orderDataLoaded: false,
-      pricesDataLoaded: false
+      pricesDataLoaded: false,
+      orderJustSubmitted: false
     }
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this)
     this.handleRegisterSubmit = this.handleLoginSubmit.bind(this)
+    this.handleNewOrderSubmit = this.handleNewOrderSubmit.bind(this)
     this.logout = this.logout.bind(this)
     this.getOrders = this.getOrders.bind(this)
     this.getPrices = this.getPrices.bind(this)
@@ -75,6 +77,24 @@ class App extends Component {
         this.setState({
           auth: json.auth,
           user: json.data.user
+        })
+      }).catch((err) => console.log(err))
+  }
+
+  handleNewOrderSubmit (e, data) {
+    e.preventDefault()
+    fetch('/api/orders/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify(data)
+    }).then((res) => res.json())
+      .then((json) => {
+        console.log(json)
+        this.setState({
+          orderJustSubmitted: true
         })
       }).catch((err) => console.log(err))
   }
@@ -142,7 +162,11 @@ class App extends Component {
             <Route exact path='/neworder' render={() => (
               !this.state.auth
                 ? <Redirect to='/login' />
-                : <NewOrderForm />
+                : this.state.orderJustSubmitted
+                  ? <Redirect to='/dashboard' />
+                  : <NewOrderForm handleNewOrderSubmit={this.handleNewOrderSubmit}
+                    balances={this.state.balances}
+                    pricesInUSD={this.state.pricesInUSD} />
             )} />
             <Route exact path='/dashboard' render={() => (
               !this.state.auth
