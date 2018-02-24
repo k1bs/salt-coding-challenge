@@ -5,4 +5,6 @@ const ordersController = require('../controllers/orders-controller')
 
 orderRoutes.get('/', ordersController.indexLedger)
 
+orderRoutes.post('/create', ordersController.create)
+
 module.exports = orderRoutes
