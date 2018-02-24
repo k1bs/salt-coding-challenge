@@ -3,6 +3,7 @@ const logger = require('morgan')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
+const path = require('path')
 const passport = require('passport')
 
 const app = express()
@@ -31,7 +32,7 @@ app.listen(PORT, () => {
 })
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.sendFile(path.join(__dirname, 'public', 'index.html'))
 })
 
 const authRoutes = require('./routes/auth-routes')
