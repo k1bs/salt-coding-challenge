@@ -41,7 +41,7 @@ class NewOrderForm extends Component {
 
   render () {
     return (
-      <div>
+      <div className='auth-form' >
         <form onSubmit={(e) => this.props.handleNewOrderSubmit(e, this.state)} >
           <div className='form-group form-row'>
             <div className='col'>
