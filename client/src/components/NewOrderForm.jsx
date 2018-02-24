@@ -54,7 +54,7 @@ class NewOrderForm extends Component {
               </select>
             </div>
             <div className='col'>
-              <label htmlFor='fromAmt'>Quantity</label>
+              <label htmlFor='fromAmt'>Quantity to Buy</label>
               <input id='fromAmt' className='form-control' type='number' value={this.state.to_amt} name='to_amt' onChange={this.handleInputChange} />
             </div>
           </div>
@@ -71,7 +71,7 @@ class NewOrderForm extends Component {
               <label htmlFor='toCurr' className='form-check-label'>Current Balance: {this.props.balances[this.state.from_curr]}</label>
             </div>
             <div className='col'>
-              <label htmlFor='toAmt'>Quantity</label>
+              <label htmlFor='toAmt'>Cost to Purchase</label>
               <input id='toAmt' className={'form-control ' + (this.state.isOrderValid !== false ? 'is-valid' : 'is-invalid')} type='number' value={this.state.from_amt} name='from_amt' readOnly />
               <label htmlFor='toAmt' className='form-check-label invalid-feedback'>{!this.state.isOrderValid ? 'Invalid Order' : ''}</label>
             </div>
