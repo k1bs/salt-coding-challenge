@@ -36,7 +36,7 @@ class App extends Component {
       orderJustSubmitted: false
     }
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this)
-    this.handleRegisterSubmit = this.handleLoginSubmit.bind(this)
+    this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this)
     this.handleNewOrderSubmit = this.handleNewOrderSubmit.bind(this)
     this.orderResetter = this.orderResetter.bind(this)
     this.logout = this.logout.bind(this)
@@ -65,6 +65,7 @@ class App extends Component {
 
   handleRegisterSubmit (e, data) {
     e.preventDefault()
+    console.log('hello from handle register submit')
     fetch('/api/auth/register', {
       method: 'POST',
       headers: {
