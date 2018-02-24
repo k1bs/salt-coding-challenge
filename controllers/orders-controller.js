@@ -6,8 +6,9 @@ orderController.indexLedger = (req, res, next) => {
   Order.indexByUserId(req.user.id)
     .then((orders) => {
       let balances = orders.reduce((balanceObj, order) => {
-        balanceObj[order.from_curr] -= parseInt(order.from_amt)
-        balanceObj[order.to_curr] += parseInt(order.to_amt)
+        balanceObj[order.from_curr] -= parseFloat(order.from_amt)
+        balanceObj[order.to_curr] += parseFloat(order.to_amt)
+        console.log(balanceObj)
         return balanceObj
       }, {
         USD: 10000,
@@ -16,7 +17,6 @@ orderController.indexLedger = (req, res, next) => {
         DOGE: 0,
         XMR: 0
       })
-      console.log(orders)
       res.status(200).json({
         message: 'ok',
         data: {
