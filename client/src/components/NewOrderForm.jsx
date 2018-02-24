@@ -28,7 +28,9 @@ class NewOrderForm extends Component {
   }
 
   orderValidityChecker () {
-    if ((this.state.from_amt <= this.props.balances[this.state.from_curr]) && this.state.to_amt > 0) {
+    if ((this.state.from_amt <= this.props.balances[this.state.from_curr]) &&
+      this.state.to_amt > 0 &&
+      (this.state.to_curr === 'BTC' || this.state.from_curr === 'BTC')) {
       this.setState({
         isOrderValid: true
       })
@@ -69,6 +71,7 @@ class NewOrderForm extends Component {
                 <option value='USD'>USD</option>
               </select>
               <label htmlFor='toCurr' className='form-check-label'>Current Balance: {this.props.balances[this.state.from_curr]}</label>
+              <label htmlFor='toCurr' className='form-check-label'>ALL TRANSACTIONS MUST INVOLVE BTC</label>
             </div>
             <div className='col'>
               <label htmlFor='toAmt'>Cost to Purchase</label>
