@@ -5,6 +5,7 @@ class Dashboard extends Component {
   componentDidMount () {
     this.props.getOrders()
     this.props.getPrices()
+    this.props.orderResetter()
     window.setInterval(() => {
       this.props.getPrices()
     }, 20000)
@@ -24,22 +25,22 @@ class Dashboard extends Component {
       {
         name: 'BTC',
         balance: this.props.balances.BTC,
-        valueInUSD: (this.props.balances.BTC + this.props.pricesInUSD.BTC)
+        valueInUSD: (this.props.balances.BTC * this.props.pricesInUSD.BTC)
       },
       {
         name: 'LTC',
         balance: this.props.balances.LTC,
-        valueInUSD: (this.props.balances.LTC + this.props.pricesInUSD.LTC)
+        valueInUSD: (this.props.balances.LTC * this.props.pricesInUSD.LTC)
       },
       {
         name: 'DOGE',
         balance: this.props.balances.DOGE,
-        valueInUSD: (this.props.balances.DOGE + this.props.pricesInUSD.DOGE)
+        valueInUSD: (this.props.balances.DOGE * this.props.pricesInUSD.DOGE)
       },
       {
         name: 'XMR',
         balance: this.props.balances.XMR,
-        valueInUSD: (this.props.balances.XMR + this.props.pricesInUSD.XMR)
+        valueInUSD: (this.props.balances.XMR * this.props.pricesInUSD.XMR)
       },
       {
         name: 'USD',

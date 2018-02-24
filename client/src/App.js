@@ -38,6 +38,7 @@ class App extends Component {
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this)
     this.handleRegisterSubmit = this.handleLoginSubmit.bind(this)
     this.handleNewOrderSubmit = this.handleNewOrderSubmit.bind(this)
+    this.orderResetter = this.orderResetter.bind(this)
     this.logout = this.logout.bind(this)
     this.getOrders = this.getOrders.bind(this)
     this.getPrices = this.getPrices.bind(this)
@@ -97,6 +98,12 @@ class App extends Component {
           orderJustSubmitted: true
         })
       }).catch((err) => console.log(err))
+  }
+
+  orderResetter () {
+    this.setState({
+      orderJustSubmitted: false
+    })
   }
 
   getOrders () {
@@ -172,6 +179,7 @@ class App extends Component {
               !this.state.auth
                 ? <Redirect to='/login' />
                 : <Dashboard getOrders={this.getOrders}
+                  orderResetter={this.orderResetter}
                   getPrices={this.getPrices}
                   balances={this.state.balances}
                   pricesInUSD={this.state.pricesInUSD}
