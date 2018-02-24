@@ -11,16 +11,7 @@ class Dashboard extends Component {
     }, 20000)
   }
 
-  renderBalanceData () {
-    return (
-      <div>
-        <h2>Balances</h2>
-        <h4>BTC: {this.props.balances.BTC}</h4>
-      </div>
-    )
-  }
-
-  renderTotalValue () {
+  renderPortfolio () {
     let valuesArr = [
       {
         name: 'BTC',
@@ -56,8 +47,30 @@ class Dashboard extends Component {
 
     return (
       <div>
-        <h5>Total in USD - ${total}</h5>
-        <Link className='btn btn-dark' to='/neworder'>Place New Order</Link>
+        <h3>Portfolio</h3>
+        <table className='table table-striped table-dark'>
+          <thead>
+            <tr>
+              <th scope='col'>Currency</th>
+              <th className='text-right' scope='col'>Balance</th>
+              <th className='text-right' scope='col'>Value in USD</th>
+            </tr>
+          </thead>
+          <tbody>
+            {valuesArr.map((e, index) => {
+              return (
+                <tr key={index}>
+                  <td>{e.name}</td>
+                  <td className='text-right'>{(e.balance)}</td>
+                  <td className='text-right'>{e.valueInUSD}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+        <h5>Value in USD - ${total}</h5>
+        <br />
+        <Link className='btn btn-primary' to='/neworder'>Place New Order</Link>
       </div>
     )
   }
@@ -65,13 +78,25 @@ class Dashboard extends Component {
   renderPricing () {
     return (
       <div className='pricing-wrapper'>
-        <h5>Prices in USD</h5>
-        <div>
-          <span>BTC: {this.props.pricesInUSD.BTC}</span>
-          <span>LTC: {this.props.pricesInUSD.LTC}</span>
-          <span>DOGE: {this.props.pricesInUSD.DOGE}</span>
-          <span>XMR: {this.props.pricesInUSD.XMR}</span>
-        </div>
+        <table className='table' >
+          <caption>Current Prices in USD</caption>
+          <thead>
+            <tr>
+              <th className='text-center' scope='col'>BTC</th>
+              <th className='text-center' scope='col'>LTC</th>
+              <th className='text-center' scope='col'>DOGE</th>
+              <th className='text-center' scope='col'>XMR</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className='text-center'>{this.props.pricesInUSD.BTC}</td>
+              <td className='text-center'>{this.props.pricesInUSD.LTC}</td>
+              <td className='text-center'>{this.props.pricesInUSD.DOGE}</td>
+              <td className='text-center'>{this.props.pricesInUSD.XMR}</td>
+            </tr>
+          </tbody>
+        </table>
         <br />
       </div>
     )
@@ -79,16 +104,13 @@ class Dashboard extends Component {
 
   render () {
     return (
-      <div>
+      <div className='dash-container'>
         {this.props.pricesDataLoaded
           ? this.renderPricing()
           : <p>Loading</p>
           }
-        {this.props.orderDataLoaded
-          ? this.renderBalanceData()
-          : <p>Loading</p>}
         {this.props.orderDataLoaded && this.props.pricesDataLoaded
-          ? this.renderTotalValue()
+          ? this.renderPortfolio()
           : <p>Loading</p>}
       </div>
     )
